@@ -29,7 +29,7 @@ public class Main {
     public static void main(String[] args) {
             
                 StudentGenerator stGen = new StudentGenerator();
-                Student[] students = stGen.studentGenerator(16000);
+                Student[] students = stGen.studentGenerator(10000);
                 Schudder.schud(students);
                 
    
