@@ -11,10 +11,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 import model.Student;
+import nl.hva.dmci.ict.se.datastructures.BinaryTree;
 import nl.hva.dmci.ict.se.datastructures.KlasGenerator;
 import nl.hva.dmci.ict.se.datastructures.QuickSort;
 import nl.hva.dmci.ict.se.datastructures.SelectionSort;
 import nl.hva.dmci.ict.se.datastructures.SortBucket;
+import nl.hva.dmci.ict.se.datastructures.Stopwatch;
 import nl.hva.dmci.ict.se.datastructures.StudentGenerator;
 import nl.hva.dmci.ict.se.datastructures.util.Schudder;
 import nl.hva.dmci.ict.se.datastructures.dalendeRijen.DalendeRijen;
@@ -29,24 +31,37 @@ public class Main {
      */
     public static void main(String[] args) {
             
-                StudentGenerator stGen = new StudentGenerator();
-                
-                Student[] students = stGen.studentGenerator(16000);
-                Schudder.schud(students);
+        Stopwatch stopwatch = new Stopwatch();
+        double timeStart, timeEnd, lapTime;
+        
+        StudentGenerator stGen = new StudentGenerator();
+
+        Student[] students = stGen.studentGenerator(1000);
+        Schudder.schud(students);
                 
    
-        for (int i = 0; i < students.length; i++) {
-            System.out.print(i);
-            System.out.println(students[i]);
-        }
+//        for (int i = 0; i < students.length; i++) {
+//            System.out.print(i);
+//            System.out.println(students[i]);
+//        }
         
+//        timeStart = stopwatch.elapsedTime();
         QuickSort.QSortStudents(students, 1, students.length-1);
+//        timeEnd = stopwatch.elapsedTime();
+//        lapTime = timeEnd - timeStart;
+//        System.out.printf(" (%.3f \t %.3f)\n", lapTime, timeEnd);
         
-        for (int i = 0; i < students.length; i++) 
-        {
-            System.out.println(students[i]);
+//        for (int i = 0; i < students.length; i++) 
+//        {
+//            System.out.println(students[i]);
+//        }
+        BinaryTree BTS = new BinaryTree();
+        
+        for (Student student : students) {
+            BTS.put(student.getGrade(), student.getStudentNumber());   
         }
         
-        
+        System.out.println(BTS.get(6.0));
+
     }
 }
