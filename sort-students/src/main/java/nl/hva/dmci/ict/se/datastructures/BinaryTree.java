@@ -91,10 +91,9 @@ public class BinaryTree <Key extends Comparable<Key>, integer>
         else 
         {
             x.studentNr.add(studentNr);
-     
         }
         
-        x.N = size(x.left) + size(x.right) + 1;
+        x.N = size(x.left) + size(x.right) + x.studentNr.size();
         return x;
     }
     
@@ -143,7 +142,7 @@ public class BinaryTree <Key extends Comparable<Key>, integer>
             }
             else if(cmp > 0) 
             {
-                return 1 + size(x.left) + rank(key, x.right);
+                return x.studentNr.size() + size(x.left) + rank(key, x.right);
             }
             else 
             {

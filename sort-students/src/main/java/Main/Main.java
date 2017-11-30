@@ -36,32 +36,26 @@ public class Main {
         
         StudentGenerator stGen = new StudentGenerator();
 
-        Student[] students = stGen.studentGenerator(1000);
+        Student[] students = stGen.studentGenerator(100);
         Schudder.schud(students);
-                
-   
-//        for (int i = 0; i < students.length; i++) {
-//            System.out.print(i);
-//            System.out.println(students[i]);
-//        }
-        
+  
 //        timeStart = stopwatch.elapsedTime();
         QuickSort.QSortStudents(students, 1, students.length-1);
 //        timeEnd = stopwatch.elapsedTime();
 //        lapTime = timeEnd - timeStart;
 //        System.out.printf(" (%.3f \t %.3f)\n", lapTime, timeEnd);
         
-//        for (int i = 0; i < students.length; i++) 
-//        {
-//            System.out.println(students[i]);
-//        }
+ for (int i = 0; i < students.length; i++) {
+            System.out.println(i + " " + students[i]);
+        }
+
         BinaryTree BTS = new BinaryTree();
         
         for (Student student : students) {
             BTS.put(student.getGrade(), student.getStudentNumber());   
         }
         
-        System.out.println(BTS.get(6.0));
+        System.out.println(BTS.rank(5.0));
 
     }
 }
