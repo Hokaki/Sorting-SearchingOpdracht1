@@ -9,9 +9,10 @@ import  java.util.LinkedList;
  *
  * @author alwin
  * @param <Key>
+ * @param <integer>
  * @param <Value>
  */
-public class BinaryTree <Key extends Comparable<Key>, integer>
+public class BinaryTree <Key extends Comparable<Key>, Integer>
 {
     private Node root; // root of BST
 
@@ -21,7 +22,7 @@ public class BinaryTree <Key extends Comparable<Key>, integer>
 //        private Value studentNr; // associated studentNrue
         private Node left, right; // links to subtrees
         private int N; // # nodes in subtree rooted here
-        LinkedList<integer> studentNr = new LinkedList<integer>();
+        LinkedList<Integer> studentNr = new LinkedList<Integer>();
 
             public Node(Key key, int N)
             { 
@@ -39,7 +40,7 @@ public class BinaryTree <Key extends Comparable<Key>, integer>
     private int size(Node x)
     {
         if (x == null) return 0;
-        else return x.N;
+        else return x.studentNr.size();
     }
 
     public LinkedList get(Key key)
@@ -66,12 +67,12 @@ public class BinaryTree <Key extends Comparable<Key>, integer>
         }
     }
 
-    public void put(Key key, integer studentNr)
+    public void put(Key key, Integer studentNr)
     { // Search for key. Update studentNrue if found; grow table if new.
      root = put(root, key, studentNr);
     }
 
-    private Node put(Node x, Key key, integer studentNr)
+    private Node put(Node x, Key key, Integer studentNr)
     {
     // Change key’s studentNrue to studentNr if key in subtree rooted at x.
     // Otherwise, add new node to subtree associating key with studentNr.
@@ -80,6 +81,7 @@ public class BinaryTree <Key extends Comparable<Key>, integer>
             return new Node(key, 1);
         }
         int cmp = key.compareTo(x.key);
+
         if (cmp < 0) 
         {
             x.left = put(x.left, key, studentNr);
@@ -88,12 +90,14 @@ public class BinaryTree <Key extends Comparable<Key>, integer>
         {
             x.right = put(x.right, key, studentNr);
         }
-        else 
+        else if (cmp == 0)
         {
             x.studentNr.add(studentNr);
+
         }
         
         x.N = size(x.left) + size(x.right) + x.studentNr.size();
+        
         return x;
     }
     
@@ -135,6 +139,7 @@ public class BinaryTree <Key extends Comparable<Key>, integer>
             return 0;
         }
         int cmp = key.compareTo(x.key);
+       
         
             if(cmp < 0) 
             {
@@ -142,7 +147,8 @@ public class BinaryTree <Key extends Comparable<Key>, integer>
             }
             else if(cmp > 0) 
             {
-                return x.studentNr.size() + size(x.left) + rank(key, x.right);
+//                System.out.println(x.studentNr.size());
+                return x.studentNr.size()+1 + size(x.left) + rank(key, x.right);
             }
             else 
             {
