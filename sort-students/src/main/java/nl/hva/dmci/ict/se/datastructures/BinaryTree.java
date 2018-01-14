@@ -57,12 +57,6 @@ public class BinaryTree <Key extends Comparable<Key>, Integer>
         else if (cmp > 0) return get(x.right, key);
         else
         {
-            if(x.studentNr != null)
-            {
-                for(int i = 0; i < x.studentNr.size(); i++){
-                    System.out.println(x.studentNr.get(i));
-                }
-            }
             return x.studentNr;
         }
     }
@@ -78,7 +72,9 @@ public class BinaryTree <Key extends Comparable<Key>, Integer>
     // Otherwise, add new node to subtree associating key with studentNr.
         if (x == null) 
         {
-            return new Node(key, 1);
+            Node a = new Node(key, 1);
+            a.studentNr.add(studentNr);
+            return a;
         }
         int cmp = key.compareTo(x.key);
 
@@ -93,7 +89,7 @@ public class BinaryTree <Key extends Comparable<Key>, Integer>
         else if (cmp == 0)
         {
             x.studentNr.add(studentNr);
-
+//            System.out.println(x.studentNr);
         }
         
         x.N = size(x.left) + size(x.right) + x.studentNr.size();
@@ -148,7 +144,7 @@ public class BinaryTree <Key extends Comparable<Key>, Integer>
             else if(cmp > 0) 
             {
 //                System.out.println(x.studentNr.size());
-                return x.studentNr.size()+1 + size(x.left) + rank(key, x.right);
+                return x.studentNr.size() + size(x.left) + rank(key, x.right);
             }
             else 
             {

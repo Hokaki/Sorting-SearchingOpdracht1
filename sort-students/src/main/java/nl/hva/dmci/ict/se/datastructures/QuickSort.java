@@ -5,29 +5,53 @@
  */
 package nl.hva.dmci.ict.se.datastructures;
 
+import model.Student;
 /**
  *
  * @author alwin
  */
 public class QuickSort {
-    
-     public static void QSortStudents(Comparable[] s, int low, int high){
+    /**
+     * Quicksort methode om de studenten lijst te sorteren hierop is 3-way-partitioning toegepast
+     * ge commenteerde deel is onderdeel van de onaangepaste quicksort
+     * 
+     * @param students
+     * @param low
+     * @param high 
+     */
+     public static void QSortStudents(Student[] students, int low, int high){
         if(high<= low) return;
-        int tl = low, i= low+1, tg = high;
-        Comparable v = s[low];
-        while (i <=tg){
-            int cmp = s[i].compareTo(v);
-            if( cmp <0) exch(s, tl++, i++);
-            else if(cmp > 0) exch(s, i, tg--);
-            else i++;
-        }
-        QSortStudents(s, low, tl-1);
-        QSortStudents(s, tg+1, high);
+//        int tl = low, i= low+1, tg = high;
+        int j = partition(students, low, high);
+//        Student v = students[low];
+//        while (i <=tg){
+//            int cmp = students[i].compareTo(v);
+//            if( cmp <0) exch(students, tl++, i++);
+//            else if(cmp > 0) exch(students, i, tg--);
+//            else if(cmp == 0){
+//               exch(students, tl++, i++);
+//               i++;
+//            }
+//        }
+//        QSortStudents(students, low, tl-1);
+//        QSortStudents(students, tg+1, high);
+
+        QSortStudents(students, low, j-1);
+        QSortStudents(students, j+1, high);
     }
     
-    public static int partition(Comparable[] s, int low, int high){
+     /**
+      * onderdeel van de onaangepaste quicksort
+      * 
+      * 
+      * @param s
+      * @param low
+      * @param high
+      * @return j
+      */
+    public static int partition(Student[] s, int low, int high){
         int i = low, j = high+1;
-        Comparable v = s[low];
+        Student v = s[low];
         while(true){
             while (less(s[++i], v)) if (i == high) break;
             while (less(v, s[--j])) if (j == low) break;
@@ -38,11 +62,27 @@ public class QuickSort {
         return j;    
     }
     
-    private static boolean less(Comparable a, Comparable b){
+    
+    /**
+     * vergelijk methode om te kijken of a kleiner is dan b 
+     * 
+     * @param a
+     * @param b
+     * @return 
+     */
+    private static boolean less(Student a, Student b){
         return a.compareTo(b) < 0;
     }
-    
-    private static void exch(Comparable[] a, int i, int j){
-        Comparable t = a[i]; a[i] = a[j]; a[j] = t;
+    /**
+     * methode om verschillende studenten te verplaatsen in de array
+     * 
+     * @param a
+     * @param i
+     * @param j 
+     */
+    private static void exch(Student[] students, int i, int j){
+        Student t = students[i]; 
+        students[i] = students[j]; 
+        students[j] = t;
     }
 }

@@ -32,35 +32,38 @@ public class Main {
     public static void main(String[] args) {
             
         Stopwatch stopwatch = new Stopwatch();
-        double timeStart, timeEnd, lapTime;
+        double timeStart, timeEnd, lapTime, tapTime;
         
         StudentGenerator stGen = new StudentGenerator();
 
-        Student[] students = stGen.studentGenerator(10000);
+        Student[] students = stGen.studentGenerator(100);
         Schudder.schud(students);
-  
-//        timeStart = stopwatch.elapsedTime();
+        timeStart = stopwatch.elapsedTime();
         QuickSort.QSortStudents(students, 0, students.length-1);
+        timeEnd = stopwatch.elapsedTime();
         for (int i = 0; i < students.length; i++) {
             System.out.println(i+1 + " " + students[i]);
         }
 //        Schudder.schud(students);
   
-//        timeEnd = stopwatch.elapsedTime();
-//        lapTime = timeEnd - timeStart;
+        lapTime = timeEnd - timeStart;
+
+        System.out.println("laptime: " + lapTime + "\t\tendtime: " + timeEnd);
+//        System.out.println("laptime: " + tapTime);
+        System.out.println(timeStart);
 //        System.out.printf(" (%.3f \t %.3f)\n", lapTime, timeEnd);
         
 // for (int i = 0; i < students.length; i++) {
 //            System.out.println(i + " " + students[i]);
 //        }
 
-        BinaryTree BTS = new BinaryTree();
+//        BinaryTree BTS = new BinaryTree();
+//        
+//        for (int i = 0; i < students.length-1; i++) {
+//            BTS.put(students[i].getGrade(), students[i].getStudentNumber());   
+//        }
         
-        for (int i = 0; i < students.length-1; i++) {
-            BTS.put(students[i].getGrade(), students[i].getStudentNumber());   
-        }
-        
-        System.out.println(BTS.rank(10.0));
-
+//        System.out.println("de rank van 6.7 is: " + BTS.rank(6.7));
+//        System.out.println("de studenten die een 6.8 hebben gehaald zijn:  " + BTS.get(6.8));
     }
 }

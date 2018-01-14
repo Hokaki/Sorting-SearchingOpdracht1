@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.Comparator;
+
 /**
  *
  * @author Alexander van den Herik
@@ -52,19 +54,12 @@ public class Student implements Comparable<Student> {
     public String toString() {
         return "Student{" + "studentNumber=" + studentNumber + ", grade=" + grade + ", klas=" + klas + '}';
     }
-
+ 
     @Override
-    public int compareTo(Student student) {
-        if (this.grade < student.getGrade()) {
-            return -1;
-        } else if (this.grade == student.getGrade()) {
-            if (this.studentNumber > student.getStudentNumber()) {
-                return 1;
-            }
-            return 0;
-        } else {
-            return 1;
-        }
+    public int compareTo(Student student){
+    return Comparator.comparing(Student::getGrade)
+              .thenComparing(Student::getStudentNumber)
+              .compare(this, student);
     }
     
     public int compareToStudentNr(Student student) {
